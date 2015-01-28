@@ -1,0 +1,58 @@
+int base=20;
+int x,y,gamePUNTAJE=0;
+int changeX=-5;
+int changeY=-5;
+int gameOver=0;
+void setup()
+{
+  size(760, 640);
+  x=(int)random(width);
+  y=height-base;
+}
+void draw()
+{
+  if(gameOver==0)
+  {
+  background(0); 
+  text("PUNTAJE:"+gamePUNTAJE+"0",620,50);
+  rect(mouseX,height-base,250,base);
+  ellipse(x,y,30,30);
+  x=x+changeX;
+  y=y+changeY;
+  if(x<0 | x>width)
+  {
+    changeX=-changeX;
+  }
+  if(y<0)
+  {
+    changeY=-changeY;
+  }
+  if(y>height-base)
+  {
+
+    if(x>mouseX && x<mouseX+100)
+    {
+      changeY=-changeY; //bounce back
+      gamePUNTAJE++;
+    }
+    else
+    {
+      gameOverSplash();
+    }
+  }
+  }
+  else
+  {
+    background(0,0,255);
+    }
+}
+void gameOverSplash()
+{
+  gameOver=1;
+}
+void mouseClicked()
+{
+  changeY=-changeY;
+  gamePUNTAJE=0;
+  gameOver=0;
+}
